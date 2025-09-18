@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -22,7 +23,22 @@ class _FlutterPortfolioScreenState extends State<FlutterPortfolioScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            SvgPicture.asset(
+              'assets/images/logo.svg',
+              colorFilter: ColorFilter.mode(Color(0xFF0079BF), BlendMode.srcIn),
+            ),
+            Text("FlutterFolio", style: TextStyle(color: Color(0xFF0079BF))),
+          ],
+        ),
+        actions: [
+          TextButton(onPressed: () {}, child: Text('About')),
+          TextButton(onPressed: () {}, child: Text('Projects')),
+          SizedBox(width: 720),
+        ],
+      ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth > 768) {
