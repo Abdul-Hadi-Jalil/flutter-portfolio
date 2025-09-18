@@ -41,10 +41,10 @@ class _FlutterPortfolioScreenState extends State<FlutterPortfolioScreen> {
         children: [
           //HeroSection(),
           Container(
-            height: 452,
-            color: Colors.grey[100],
+            height: 500,
+            color: Color(0xE6F2FAFF),
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 96, horizontal: 80),
+              padding: EdgeInsets.symmetric(vertical: 55, horizontal: 80),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -69,7 +69,35 @@ class _FlutterPortfolioScreenState extends State<FlutterPortfolioScreen> {
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
+                      SizedBox(height: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            spacing: 8,
+                            children: [
+                              Icon(
+                                Icons.email_outlined,
+                                color: Color(0xFF0079BF),
+                              ),
+                              Text('+92 309-8979308'),
+                            ],
+                          ),
+                          Row(
+                            spacing: 8,
+                            children: [
+                              Icon(
+                                Icons.phone_outlined,
+                                color: Color(0xFF0079BF),
+                              ),
+                              Text('abdulhadijalil34@gmail.com'),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 2),
                       Row(
+                        spacing: 8,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           IconButton(
@@ -94,16 +122,31 @@ class _FlutterPortfolioScreenState extends State<FlutterPortfolioScreen> {
                       ),
                     ],
                   ),
-                  CircleAvatar(radius: 125, child: Image.asset("download.jpg")),
+                  CircleAvatar(
+                    backgroundColor: Color(0xE6F2FAFF),
+                    radius: 150,
+                    child: ClipOval(
+                      child: Image.asset("assets/images/profile.jpg"),
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-          Container(
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 94, horizontal: 80),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('My Project'),
-                Row(children: [SearchBar(), SearchBar(), SearchBar()]),
+                Text(
+                  'My Projects',
+                  style: TextStyle(
+                    fontFamily: "Inter",
+                    fontWeight: FontWeight.w600,
+                    fontSize: 36,
+                  ),
+                ),
+                Row(children: []),
                 //GridView(gridDelegate: )
               ],
             ),
