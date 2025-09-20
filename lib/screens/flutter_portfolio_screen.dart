@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio/widgets/search_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,6 +12,20 @@ class FlutterPortfolioScreen extends StatefulWidget {
 }
 
 class _FlutterPortfolioScreenState extends State<FlutterPortfolioScreen> {
+  final List<ButtonSegment<String>> typeSegments = <ButtonSegment<String>>[
+    ButtonSegment<String>(value: 'Newest', label: Text('Newest')),
+    ButtonSegment<String>(value: 'Oldest', label: Text('Oldest')),
+  ];
+  Set<String> selectedType = {"Newest"};
+  final List<ButtonSegment<String>> complexitySegments =
+      <ButtonSegment<String>>[
+        ButtonSegment<String>(value: "All", label: Text('All')),
+        ButtonSegment<String>(value: "Easy", label: Text('Easy')),
+        ButtonSegment<String>(value: "Medium", label: Text('Medium')),
+        ButtonSegment<String>(value: "Hard", label: Text('Hard')),
+      ];
+  Set<String> selectedComplexity = {'All'};
+
   _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -27,6 +42,8 @@ class _FlutterPortfolioScreenState extends State<FlutterPortfolioScreen> {
         title: Row(
           children: [
             SvgPicture.asset(
+              height: 32,
+              width: 32,
               'assets/images/logo.svg',
               colorFilter: ColorFilter.mode(Color(0xFF0079BF), BlendMode.srcIn),
             ),
@@ -149,6 +166,8 @@ class _FlutterPortfolioScreenState extends State<FlutterPortfolioScreen> {
               ),
             ),
           ),
+          // projects section
+          // <start>
           Padding(
             padding: EdgeInsets.symmetric(vertical: 94, horizontal: 80),
             child: Column(
@@ -162,11 +181,72 @@ class _FlutterPortfolioScreenState extends State<FlutterPortfolioScreen> {
                     fontSize: 36,
                   ),
                 ),
-                Row(children: []),
-                //GridView(gridDelegate: )
+                SizedBox(height: 50),
+                // search bar and filter options
+                // <start>
+                Row(
+                  children: [
+                    MySearchBar(),
+                    SizedBox(width: 292),
+                    Column(
+                      spacing: 5,
+                      children: [
+                        Text(
+                          'Filter by Complexity',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SegmentedButton<String>(
+                          showSelectedIcon: false,
+                          style: ButtonStyle(
+                            shape: WidgetStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                          ),
+                          segments: complexitySegments,
+                          selected: selectedComplexity,
+                          onSelectionChanged: (Set<String> newSelection) {
+                            setState(() {
+                              selectedComplexity = newSelection;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: 30),
+                    Column(
+                      spacing: 5,
+                      children: [
+                        Text('Sort by Date', style: TextStyle(fontSize: 18)),
+                        SegmentedButton(
+                          style: ButtonStyle(
+                            shape: WidgetStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                          ),
+                          showSelectedIcon: false,
+                          segments: typeSegments,
+                          selected: selectedType,
+                          onSelectionChanged: (Set<String> newType) {
+                            setState(() {
+                              selectedType = newType;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                // <end>
+                // search bar and filter options
               ],
             ),
           ),
+          // <end>
+          // projects section
         ],
       ),
     );
