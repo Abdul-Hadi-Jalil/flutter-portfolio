@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio/widgets/tech_stack.dart';
 
 class ProjectCard extends StatelessWidget {
   final String title;
@@ -64,6 +65,40 @@ class ProjectCard extends StatelessWidget {
                 ),
                 SizedBox(height: 19),
                 Text(description, style: TextStyle(fontSize: 14)),
+                SizedBox(height: 17),
+                Row(
+                  children: techStack
+                      .map((tech) => TechStack(text: tech))
+                      .toList(),
+                ),
+                SizedBox(height: 32),
+                Row(
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {},
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          height: 40,
+                          width: 111,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            color: Color.fromARGB(255, 2, 128, 200),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'View Project',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
